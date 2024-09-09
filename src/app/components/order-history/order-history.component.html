@@ -1,0 +1,91 @@
+<div class="main-content">
+    <style>
+
+        /* Başlık stili */
+        .main-content h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333333;
+            text-align: center;
+        }
+
+        /* Tablo stili */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table th,
+        .table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #dddddd;
+        }
+
+        .table th {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+        }
+
+        .table td {
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+    </style>
+
+
+    <div class="section-content section-content-p30">
+
+        <div class="container-fluid">
+
+            <h3>Your Orders</h3>
+
+            <div *ngIf="orderHistoryList.length > 0">
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="20%">Order Tracking Number</th>
+                        <th width="10%">Total Price</th>
+                        <th width="10%">Total Quantity</th>
+                        <th width="10%">Date</th>
+                    </tr>
+
+                    <tr *ngFor="let tempOrderHistory of orderHistoryList">
+                        <td>
+                            {{ tempOrderHistory.orderTrackingNumber}}
+                        </td>
+
+                        <td>
+                            {{ tempOrderHistory.totalPrice | currency: 'USD'}}
+                        </td>
+
+                        <td>
+                            {{ tempOrderHistory.totalQuantity}}
+                        </td>
+
+                        <td>
+                            {{ tempOrderHistory.dateCreated | date:'medium'}}
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+
+        </div>
+
+        <!-- if order history is empty then display a message -->
+        <div *ngIf="orderHistoryList.length == 0" class="alert alert-warning col-md-12" role="alert">
+
+            No orders found.
+
+        </div>
+
+    </div>
+
+</div>
